@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-export default class Note extends React.Component {
+export default class Note extends Component {
   render() {
-    return <div><h1>The OoGhiJ MIQtxxXA is a super computer</h1></div>;
+    return <div>{this.props.task}</div>;
   }
 }
