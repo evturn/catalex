@@ -27,7 +27,7 @@ export default class App extends Component {
       <div>
         <h1>The OoGhiJ MIQtxxXA is a super computer</h1>
         <button className="add-note" onClick={this.addNote}>+</button>
-        <Notes items={notes} />
+        <Notes items={notes} onEdit={this.editNote}/>
       </div>
     );
   }
@@ -38,5 +38,8 @@ export default class App extends Component {
         task: 'Freeze jars of mayo then sell them as ice cream.'
       }])
     });
+  }
+  editNote(noteId, task) {
+    console.log('Pretending you can edit this.', noteId, task);
   }
 }
