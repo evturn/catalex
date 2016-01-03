@@ -27,9 +27,16 @@ export default class App extends Component {
       <div>
         <h1>The OoGhiJ MIQtxxXA is a super computer</h1>
         <button className="add-note" onClick={this.addNote}>+</button>
-        <Notes items={notes} onEdit={this.editNote}/>
+        <Notes items={notes}
+          onEdit={this.editNote}
+          onDelete={this.deleteNote} />
       </div>
     );
+  }
+  deleteNote = (id) => {
+    this.setState({
+      notes: this.state.notes.filter((note => note.id !== id))
+    });
   }
   addNote = () => {
     this.setState({
