@@ -31,7 +31,12 @@ export default class App extends Component {
       </div>
     );
   }
-  addNote() {
-    console.log('go fuck yourself.');
+  addNote = () => {
+    this.setState({
+      notes: this.state.notes.concat([{
+        id: uuid.v4(),
+        task: 'Freeze jars of mayo then sell them as ice cream.'
+      }])
+    });
   }
 }
