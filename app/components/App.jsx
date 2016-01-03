@@ -26,9 +26,12 @@ export default class App extends Component {
     return (
       <div>
         <h1>The OoGhiJ MIQtxxXA is a super computer</h1>
+        <button className="add-note" onClick={this.addNote}>+</button>
         <Notes items={notes} />
       </div>
     );
   }
-
+  addNote() {
+    console.log('go fuck yourself.');
+  }
 }
