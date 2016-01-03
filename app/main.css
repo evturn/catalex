@@ -28,17 +28,18 @@ li {
   font-size: 23px;
 }
 
+.delete,
 .add-note {
   background-color: hotpink;
   color: gold;
   border: 2px solid #ffffff;
   outline: none;
   cursor: pointer;
-  height: 50px;
-  width: 50px;
-  line-height: 50px;
+  height: 45px;
+  width: 45px;
+  line-height: 45px;
   font-size: 30px;
   margin: 0;
   padding: 0;
-  border-radius: 6px;
+  border-radius: 50%;
 }

@@ -35,7 +35,7 @@ export default class App extends Component {
   }
   deleteNote = (id) => {
     this.setState({
-      notes: this.state.notes.filter((note => note.id !== id))
+      notes: this.state.notes.filter((note) => note.id !== id)
     });
   }
   addNote = () => {
