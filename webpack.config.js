@@ -20,7 +20,7 @@ const common = {
   // },
   //
   resolve: {
-    extenstions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx']
   },
   module: {
     loaders: [

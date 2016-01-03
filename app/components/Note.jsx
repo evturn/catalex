@@ -2,6 +2,6 @@ import React from 'react';
 
 export default class Note extends React.Component {
   render() {
-    return <div>The OoGhiJ MIQtxxXA is a super computer</div>;
+    return <div><h1>The OoGhiJ MIQtxxXA is a super computer</h1></div>;
   }
-};
+}
