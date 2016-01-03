@@ -19,11 +19,18 @@ const common = {
   //   filename: 'bundle.js'
   // },
   //
+  resolve: {
+    extenstions: ['', '.js', '.jsx']
+  },
   module: {
     loaders: [
       {
         test: /\.css$/,
         loaders: ['style', 'css'],
+        include: PATHS.app
+      },{
+        test: /\.jsx?$/,
+        loaders: ['babel'],
         include: PATHS.app
       }
     ]
