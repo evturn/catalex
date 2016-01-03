@@ -10,3 +10,18 @@ h1 {
 li {
   list-style-type: none;
 }
+
+.add-note {
+  background-color: gold;
+  color: hotpink;
+  border: 1px solid gold;
+  outline: none;
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
+  font-size: 40px;
+  margin: 0;
+  padding: 0;
+  border-radius: 3px;
+}
