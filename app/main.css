@@ -5,23 +5,40 @@ body {
 
 h1 {
   color: gold;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 li {
   list-style-type: none;
 }
 
+.notes {
+  border-top: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.note {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-size: 23px;
+}
+
 .add-note {
-  background-color: gold;
-  color: hotpink;
-  border: 1px solid gold;
+  background-color: hotpink;
+  color: gold;
+  border: 2px solid #ffffff;
   outline: none;
   cursor: pointer;
   height: 50px;
   width: 50px;
   line-height: 50px;
-  font-size: 40px;
+  font-size: 30px;
   margin: 0;
   padding: 0;
-  border-radius: 3px;
+  border-radius: 6px;
 }
