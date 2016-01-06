@@ -27,7 +27,7 @@ export default class App extends Component {
       <div>
         <h1>The OoGhiJ MIQtxxXA is a super computer</h1>
         <button className="add-note" onClick={this.addNote}>+</button>
-        <Notes items={notes}
+        <Notes notes={notes}
           onEdit={this.editNote}
           onDelete={this.deleteNote} />
       </div>
@@ -42,13 +42,13 @@ export default class App extends Component {
     this.setState({
       notes: this.state.notes.concat([{
         id: uuid.v4(),
-        task: 'Freeze jars of mayo then sell them as ice cream.'
+        task: 'New task'
       }])
     });
   }
   editNote = (id, task) => {
     const notes = this.state.notes.map((note) => {
-      if (note.id === id) {
+      if(note.id === id && task) {
         note.task = task;
       }
 
