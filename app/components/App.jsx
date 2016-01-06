@@ -23,6 +23,7 @@ export default class App extends Component {
   }
   render() {
     const notes = this.state.notes;
+
     return (
       <div>
         <h1>The OoGhiJ MIQtxxXA is a super computer</h1>
