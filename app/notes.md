@@ -1,3 +1,5 @@
+### Lifecycle Hooks
+
 #### `componentWillMount()`
 ##### Triggered once before any rendering.
 One way to use it would be to load data asynchronously there and force rendering through `setState`.
@@ -25,3 +27,16 @@ You can modify the DOM here. This can be useful for adapting other code to work 
 #### `componentWillUnmount()`
 ##### Triggered just before a component is unmounted from the DOM.
 This is the ideal place to perform cleanup (e.g., remove running timers, custom DOM elements, and so on).
+
+### Properties/Methods (`React.createClass`)
+
+#### `displayName`
+It is preferable to set `displayName` as that will improve debug information. For ES6 classes this is derived automatically based on the class name.
+#### `getInitialState()`
+In class based approach the same can be achieved through `constructor`.
+#### `getDefaultProps()`
+In classes you can set these in `constructor`.
+#### `mixins`
+`mixins` contains an array of mixins to apply to components.
+#### `statics`
+`statics` contains static properties and method for a component.
