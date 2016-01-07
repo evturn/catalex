@@ -16,7 +16,7 @@ export default class Editable extends Component {
         autoFocus={true}
         placeholder={this.props.value}
         onBlur={this.finishEdit}
-        onKeyPress={this.checkEnter} />;
+        onKeyPress={this.checkEnter} />
     );
   };
   renderValue = () => {
