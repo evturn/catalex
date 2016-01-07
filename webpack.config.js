@@ -13,14 +13,10 @@ process.env.BABEL_ENV = TARGET;
 
 const common = {
   entry: PATHS.app,
-  //
-  // Ain't no reason for this in development
-  //
-  // output: {
-  //   path: PATHS.build,
-  //   filename: 'bundle.js'
-  // },
-  //
+  output: {
+    path: PATHS.build,
+    filename: 'bundle.js'
+  },
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
@@ -32,14 +28,16 @@ const common = {
         include: PATHS.app
       },{
         test: /\.jsx?$/,
-        loaders: ['babel'],
+        loaders: ['babel?cacheDirectory'],
         include: PATHS.app
       }
     ]
   },
   plugins: [
     new HtmlwebpackPlugin({
-      title: 'Cache Money Records'
+      template: 'node_modules/html-webpack-template/index.html',
+      title: 'Cache Money Records',
+      appMountId: 'app'
     })
   ]
 };
@@ -60,4 +58,8 @@ if (TARGET === 'start' || !TARGET) {
       new webpack.HotModuleReplacementPlugin()
     ]
   });
+}
+
+if(TARGET === 'build') {
+  module.exports = merge(common, {});
 }
