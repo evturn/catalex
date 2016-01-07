@@ -18,7 +18,7 @@ class NoteStore {
       notes: notes.concat(note)
     });
   }
-  update(updateNote) {
+  update(updatedNote) {
     const notes = this.notes.map((note) => {
       if (note.id === updatedNote.id) {
         note = assign({}, note, updatedNote);
