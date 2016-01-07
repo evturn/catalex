@@ -1,4 +1,15 @@
+##### Overview
+* Alter the `Store` through actions.
+* This leads to a cascade causing `App` state to update through `setState`.
+* In turn this will cause the component to render.
+
+##### `AltContainer`
+* The `AltContainer` wrapper simplifies the connection logic greatly.
+* `AltContainer` allows us to bind data to its immediate children.
+* `alt.dispatcher.register(console.log.bind(console))` in a store constructor would log all that goes through the alt instance.
+
 #### `localStorage` overview
+applies to app/libs/*
 
 ##### `storage.getItem(k)`
 Returns the stored string value for the given key.

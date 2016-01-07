@@ -28,7 +28,6 @@ class NoteStore {
     });
 
     this.setState({notes});
-
   }
   delete(id) {
     this.setState({
