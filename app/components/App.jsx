@@ -22,6 +22,6 @@ export default class App extends Component {
     );
   }
   addLane() {
-    LaneActions.create({ name: 'Big Tünechi' });
+    LaneActions.create({ name: 'New lane' });
   }
 }
