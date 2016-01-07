@@ -28,7 +28,7 @@ li {
   display: inline-block;
 }
 
-.delete,
+.delete-note,
 .add-note {
   background-color: hotpink;
   color: gold;
@@ -41,7 +41,7 @@ li {
   width: 20px;
 }
 
-.note .delete {
+.note .delete-note {
   float: right;
   background-color: hotpink;
   color: gold;
@@ -50,6 +50,6 @@ li {
   cursor: pointer;
   visibility: hidden;
 }
-.note:hover .delete {
+.note:hover .delete-note {
   visibility: visible;
 }
