@@ -11,7 +11,7 @@ export default class App extends Component {
         <h1>The OoGhiJ MIQtxxXA is a super computer</h1>
         <button className="add-lane" onClick={this.addLane}>+</button>
         <AltContainer
-          stores={LaneStore}
+          stores={[LaneStore]}
           inject={{
             lanes: () => LaneStore.getState().lanes || []
           }}
@@ -22,6 +22,6 @@ export default class App extends Component {
     );
   }
   addLane() {
-    LaneActions.create({ task: 'Smells like burning.' });
+    LaneActions.create({ name: 'Big Tünechi' });
   }
 }

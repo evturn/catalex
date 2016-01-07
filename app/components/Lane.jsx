@@ -6,6 +6,8 @@ import NoteStore from '../stores/NoteStore';
 
 export default class Lane extends Component {
   render() {
+    const {lane, ...props} = this.props;
+
     return (
       <div {...props}>
         <div className="lane-header">
@@ -24,5 +26,14 @@ export default class Lane extends Component {
         </AltContainer>
       </div>
     );
+  }
+  addNote() {
+    NoteActions.create({ task: 'This task is your note.' });
+  }
+  editNote(id, task) {
+    NoteActions.update({ id, task });
+  }
+  deleteNote(id) {
+    NoteActions.delete(id);
   }
 }
