@@ -18,7 +18,7 @@ export default class App extends Component {
   }
   storeChanged = (state) => {
     this.setState(state)
-  }
+  };
   render() {
     const notes = this.state.notes;
 

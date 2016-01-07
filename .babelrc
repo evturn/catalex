@@ -14,6 +14,9 @@
   ],
   "env": {
     "start": {
+      "presets": [
+        "react-hmre"
+      ],
       "plugins": [
         [
           "react-transform", {
