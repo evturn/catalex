@@ -11,68 +11,88 @@ export default class Lane extends Component {
     super(props);
 
     const id = props.lane.id;
-
-    this.addNote = this.addNote.bind(this, id);
-    this.deleteNote = this.deleteNote.bind(this, id);
-    this.editName = this.editName.bind(this, id);
-    this.activateLaneEdit = this.activateLaneEdit.bind(this, id);
   }
   render() {
     const {lane, ...props} = this.props;
 
     return (
       <div {...props}>
-        <div className="lane-header">
-          <Editable className="lane-name" editing={lane.editing}
-            value={lane.name} onEdit={this.editName}
-            onValueClick={this.activateLaneEdit} />
+        <div className="lane-header" onClick={this.activateLaneEdit}>
+
           <div className="lane-add-note">
             <button onClick={this.addNote}>+</button>
           </div>
+
+          <Editable
+            className="lane-name"
+            editing={lane.editing}
+            value={lane.name}
+            onEdit={this.editName}
+            onValueClick={this.activateLaneEdit}
+          />
+
+          <div className="lane-delete">
+            <button onClick={this.deleteLane}>X</button>
+          </div>
         </div>
+
         <AltContainer
           stores={[NoteStore]}
-          inject={{
-            notes: () => NoteStore.get(lane.notes)
-          }}
-        >
+          inject={{notes: () => NoteStore.get(lane.notes)}}>
+
           <Notes
             onValueClick={this.activateNoteEdit}
             onEdit={this.editNote}
-            onDelete={this.deleteNote} />
+            onDelete={this.deleteNote}
+          />
         </AltContainer>
       </div>
     );
   }
-  addNote(laneId) {
+  addNote = (e) => {
+    e.stopPropagation();
     const note = NoteActions.create({task: 'New task'});
 
     LaneActions.attachToLane({
       noteId: note.id,
-      laneId
+      laneId: this.props.lane.id
     });
-  }
+  };
   editNote(id, task) {
     NoteActions.update({id, task, editing: false});
   }
-  deleteNote(laneId, noteId) {
-    LaneActions.detachFromLane({laneId, noteId});
+  deleteNote = (noteId, e) => {
+    e.stopPropagation();
+    LaneActions.detachFromLane({
+      laneId: this.props.lane.id,
+      noteId
+    });
     NoteActions.delete(noteId);
-  }
-  editName(id, name) {
-    console.log('edited lane name, idiot!', id, name);
-    if (name) {
-      LaneActions.update({id, name, editing: false});
-    } else {
-      LaneActions.delete(id);
-    }
-  }
-  activateLaneEdit(id) {
-    console.log('edit lane name, stupid!', id);
-    LaneActions.update({id, editing: true});
-  }
-  activateNoteEdit(id) {
-    console.log('edit note task, dumb person!', id);
-    NoteActions.update({id, editing: true});
-  }
+  };
+  editName = (name) => {
+    console.log('EDIT_LANE_NAME');
+
+    LaneActions.update({
+      id: this.props.lane.id,
+      editing: false,
+      name
+    });
+  };
+  deleteLane = () => {
+    LaneActions.delete(this.props.lane.id);
+  };
+  activateLaneEdit = () => {
+    console.log('EDIT_LANE');
+    LaneActions.update({
+      id: this.props.lane.id,
+      editing: true
+    });
+  };
+  activateNoteEdit = (id) => {
+    console.log('EDIT_NOTE');
+    NoteActions.update({
+      editing: true,
+      id
+    });
+  };
 }
