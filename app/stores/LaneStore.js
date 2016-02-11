@@ -5,21 +5,18 @@ import LaneActions from '../actions/LaneActions';
 class LaneStore {
   constructor() {
     this.bindActions(LaneActions);
-
     this.lanes = [];
   }
   create(lane) {
-    const lanes = this.lanes;
-
     lane.id = uuid.v4();
     lane.notes = lane.notes || [];
 
     this.setState({
-      lanes: lanes.concat(lane)
+      lanes: this.lanes.concat(lane)
     });
   }
   update(updatedLane) {
-    const lanes = this.lanes.map((lane) => {
+    const lanes = this.lanes.map(lane => {
       if (lane.id === updatedLane.id) {
         lane = Object.assign({}, lane, updatedLane);
       }
@@ -27,15 +24,15 @@ class LaneStore {
       return lane;
       });
 
-      this.setState({lanes});
+      this.setState({ lanes });
     }
   delete(id) {
     this.setState({
-      lanes: this.lanes.filter((lane) => lane.id !== id)
+      lanes: this.lanes.filter(lane => lane.id !== id)
     });
   }
   attachToLane({laneId, noteId}) {
-    const lanes = this.lanes.map((lane) => {
+    const lanes = this.lanes.map(lane => {
       if (lane.id === laneId) {
         if (lane.notes.indexOf(noteId) === -1) {
           lane.notes.push(noteId);
@@ -47,18 +44,18 @@ class LaneStore {
       return lane;
     });
 
-    this.setState({lanes});
+    this.setState({ lanes });
   }
   detachFromLane({laneId, noteId}) {
-    const lanes = this.lanes.map((lane) => {
+    const lanes = this.lanes.map(lane => {
       if (lane.id === laneId) {
-        lane.notes = lane.notes.filter((note) => note !== noteId);
+        lane.notes = lane.notes.filter(note => note !== noteId);
       }
 
       return lane;
     });
 
-    this.setState({lanes});
+    this.setState({ lanes });
   }
 }
 
