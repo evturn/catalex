@@ -11,7 +11,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <h1>The OoGhiJ MIQtxxXA is a super computer</h1>
+        <h1>Nötes</h1>
         <button className="add-lane" onClick={this.addLane}>+</button>
         <AltContainer
           stores={[LaneStore]}
