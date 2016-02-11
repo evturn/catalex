@@ -1,6 +1,7 @@
 import uuid from 'node-uuid';
 import alt from '../libs/alt';
 import LaneActions from '../actions/LaneActions';
+import update from 'react-addons-update';
 
 class LaneStore {
   constructor() {
@@ -33,11 +34,15 @@ class LaneStore {
   }
   attachToLane({laneId, noteId}) {
     const lanes = this.lanes.map(lane => {
+      if (lane.notes.includes(noteId)) {
+        lane.notes = lanes.notes.filter(note => note != noteId);
+      }
+
       if (lane.id === laneId) {
-        if (lane.notes.indexOf(noteId) === -1) {
-          lane.notes.push(noteId);
-        } else {
+        if (lane.notes.includes(noteId)) {
           console.warn('Dude, chill, we have that already.', lanes);
+        } else {
+          lane.notes.push(noteId);
         }
       }
 
