@@ -37,11 +37,12 @@ const noteTarget = {
 export default class Note extends Component {
   render() {
     const {
-      connectDragSource, onMove, isDragging,
-      connectDropTarget, id, ...props
+      connectDragSource, connectDropTarget, isDragging,
+      onMove, id, editing, ...props
     } = this.props;
+    const dragSource = editing ? a => a : connectDragSource;
 
-    return connectDragSource(connectDropTarget(
+    return dragSource(connectDropTarget(
       <li
         style={{opacity: isDragging ? 0 : 1}}
         {...props}>
@@ -49,59 +50,4 @@ export default class Note extends Component {
       </li>
     ));
   }
-  // constructor(props) {
-  //   super(props);
-
-  //   this.state = {
-  //     editing: false
-  //   };
-  // }
-  // render() {
-  //   if(this.state.editing) {
-  //     return this.renderEdit();
-  //   }
-
-  //   return this.renderNote();
-  // }
-  // renderEdit = () => {
-  //   return <input type="text"
-  //     autoFocus={true}
-  //     placeholder={this.props.task}
-  //     onBlur={this.finishEdit}
-  //     onKeyPress={this.checkEnter} />;
-  // };
-  // renderDelete = () => {
-  //   return <button
-  //     className="delete"
-  //     onClick={this.props.onDelete}>x</button>;
-  // };
-  // renderNote = () => {
-  //   const onDelete = this.props.onDelete;
-
-  //   return (
-  //     <div onClick={this.edit}>
-  //       <span className="value">{this.props.task}</span>
-  //       {onDelete ? this.renderDelete() : null }
-  //     </div>
-  //   );
-  // };
-  // edit = () => {
-  //   this.setState({
-  //     editing: true
-  //   });
-  // };
-  // checkEnter = (e) => {
-  //   if(e.key === 'Enter') {
-  //     this.finishEdit(e);
-  //   }
-  // };
-  // finishEdit = (e) => {
-  //   if(this.props.onEdit) {
-  //     this.props.onEdit(e.target.value);
-  //   }
-
-  //   this.setState({
-  //     editing: false
-  //   });
-  // };
 }
