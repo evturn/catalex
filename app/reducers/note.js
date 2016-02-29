@@ -1,4 +1,4 @@
-function(state=[], action) {
+function note(state=[], action) {
   switch (action.type) {
     case 'CREATE_NOTE':
     case 'UPDATE_NOTE':

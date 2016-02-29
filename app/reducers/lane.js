@@ -1,10 +1,11 @@
-function(state=[], action) {
+function lane(state=[], action) {
   switch (action.type) {
     case 'CREATE_LANE':
     case 'UPDATE_LANE':
     case 'DELETE_LANE':
     case 'ATTACH_NOTE':
     case 'DETACH_NOTE':
+    case 'MOVE':
     default
       return state;
   }

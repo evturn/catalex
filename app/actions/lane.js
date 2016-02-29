@@ -27,3 +27,9 @@ export const detachLane() => {
     type: 'DETACH_LANE'
   };
 };
+
+export const move() => {
+  return {
+    type: 'MOVE'
+  };
+};
