@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 export default class Editable extends Component {
   render() {
@@ -12,7 +12,7 @@ export default class Editable extends Component {
   }
   renderEdit = () => {
     return <input type="text"
-      ref={(e) => e ? e.selectionStart = this.props.value.length : null}
+      ref={e => e ? e.selectionStart = this.props.value.length : null}
       autoFocus={true}
       placeholder={this.props.value}
       onBlur={this.finishEdit}
@@ -25,7 +25,8 @@ export default class Editable extends Component {
     return (
       <div onClick={this.props.onValueClick}>
         <span className="value">{this.props.value}</span>
-        {onDelete ? this.renderDelete() : null } </div>
+        {onDelete ? this.renderDelete() : null }
+      </div>
     );
   };
   renderDelete = () => {

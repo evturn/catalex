@@ -15,11 +15,8 @@ export default class App extends Component {
         <button className="add-lane" onClick={this.addLane}>+</button>
         <AltContainer
           stores={[LaneStore]}
-          inject={{
-            lanes: () => LaneStore.getState().lanes || []
-          }}
-        >
-        <Lanes />
+          inject={{ lanes: () => LaneStore.getState().lanes || [] }}>
+          <Lanes />
         </AltContainer>
       </div>
     );
