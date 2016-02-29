@@ -16,15 +16,17 @@ export const deleteLane() => {
   };
 };
 
-export const attachNote() => {
+export const attachToLane() => {
   return {
-    type: 'ATTACH_NOTE'
+    type: 'ATTACH_TO_LANE'
   };
 };
 
-export const detachLane() => {
+export const detachFromLane({ laneId, noteId }) => {
   return {
-    type: 'DETACH_LANE'
+    type: 'DETACH_FROM_LANE',
+    laneId,
+    noteId
   };
 };
 

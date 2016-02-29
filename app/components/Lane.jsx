@@ -3,10 +3,9 @@ import { DropTarget } from 'react-dnd';
 import ItemTypes from '../constants/itemTypes';
 import AltContainer from 'alt-container';
 import Notes from './Notes.jsx';
-import NoteActions from '../actions/NoteActions';
-import NoteStore from '../stores/NoteStore';
-import LaneActions from '../actions/LaneActions';
+import noteActions from '../actions/note';
 import Editable from './Editable';
+import { detachFromLane } from '../actions/lane';
 
 const noteTarget = {
   hover(targetProps, monitor) {
@@ -77,7 +76,7 @@ export default class Lane extends Component {
   }
   deleteNote = (noteId, e) => {
     e.stopPropagation();
-    LaneActions.detachFromLane({
+    detachFromLane({
       laneId: this.props.lane.id,
       noteId
     });
