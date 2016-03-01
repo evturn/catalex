@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import Lane from './Lane';
 
-export default ({lanes}) => {
+export default ({ lanes }) => {
+  console.log(lanes);
   return (
     <div className="lanes">{lanes.map(lane =>
       <Lane className="lane" key={lane.id} lane={lane} />

@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import { reducer } from '../reducers';
+import reducer from '../reducers';
 
 const storage = {
   get(key) {
@@ -23,7 +23,12 @@ const getInitialState = (storeName) => {
     console.error('Failed to bootstrap data. I am also sleeping with your wife.', err);
   }
 
-  return data;
+
+  console.log(data);
+  return {
+    note: data.NoteStore,
+    lane: data.LaneStore
+  };
 };
 
 const initialState = getInitialState('app');

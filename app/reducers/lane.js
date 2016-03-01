@@ -1,7 +1,7 @@
 import uuid from 'node-uuid';
 import update from 'react-addons-update';
 
-function lane(state=[], action) {
+export default function lane(state=[], action) {
   switch (action.type) {
     case 'CREATE_LANE':
       return state.concat({
