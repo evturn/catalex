@@ -3,7 +3,7 @@ function note(state=[], action) {
     case 'CREATE_NOTE':
     case 'UPDATE_NOTE':
     case 'DELETE_NOTE':
-    default
+    default:
       return state;
   }
 }
