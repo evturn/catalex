@@ -35,7 +35,7 @@ export const attachToLane = ({ laneId, noteId }) => {
 };
 
 
-export const move = ({sourceId, targetId}) => {
+export const move = ({ sourceId, targetId }) => {
   return {
     type: 'MOVE',
     sourceId,
