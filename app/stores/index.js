@@ -23,15 +23,13 @@ const getInitialState = (storeName) => {
     console.error('Failed to bootstrap data. I am also sleeping with your wife.', err);
   }
 
-
-  console.log(data);
   return {
-    note: data.NoteStore,
-    lane: data.LaneStore
+    note: data,
+    lane: data
   };
 };
 
 const initialState = getInitialState('app');
-const store = createStore(reducer, initialState);
+const store = createStore(reducer);
 
 export default store;

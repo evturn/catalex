@@ -8,11 +8,15 @@ import { createLane } from '../actions/lane';
 @DragDropContext(HTML5Backend)
 class App extends Component {
   render() {
+    const { dispatch, lanes } = this.props;
+
+    const create = () => dispatch(createLane());
+
     return (
       <div>
         <h1>Nötes</h1>
-        <button className="add-lane" onClick={createLane}>+</button>
-        <Lanes />
+        <button className="add-lane" onClick={create}>+</button>
+        <Lanes lanes={lanes} />
       </div>
     );
   }
