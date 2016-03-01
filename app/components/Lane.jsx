@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { DropTarget } from 'react-dnd';
 import ItemTypes from '../constants/itemTypes';
 import Notes from './Notes.jsx';
-import noteActions from '../actions/note';
 import Editable from './Editable';
+import { createNote, updateNote, deleteNote } from '../actions/note';
 import {
   detachFromLane, updateLane,
   deleteLane, attachToLane } from '../actions/lane';
@@ -27,6 +27,9 @@ const noteTarget = {
   connectDropTarget: connect.dropTarget()
 }))
 class Lane extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     const { connectDropTarget, lane, ...props } = this.props;
 
@@ -59,14 +62,14 @@ class Lane extends Component {
       </div>
     );
   }
+
   addNote = (e) => {
     e.stopPropagation();
-    const note = NoteActions.create({task: 'New task'});
+    const { dispatch, lane } = this.props;
 
-    attachToLane({
-      noteId: note.id,
-      laneId: this.props.lane.id
-    });
+    const note = dispatch(createNote());
+    console.log(note);
+    dispatch(attachToLane(lane))
   };
 
   editNote(id, task) {

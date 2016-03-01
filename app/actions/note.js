@@ -1,6 +1,11 @@
 export const createNote = () => {
   return {
-    type: 'CREATE_NOTE'
+    type: 'CREATE_NOTE',
+    note: {
+      id: uuid.v4(),
+      task: '',
+      editing: true
+    }
   };
 };
 
