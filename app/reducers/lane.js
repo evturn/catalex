@@ -45,7 +45,7 @@ export default function lane(state=[], action) {
 
         return lane;
       });
-    case 'MOVE':
+    case 'MOVE': {
       const sourceLane = state.filter(lane => lane.notes.includes(action.sourceId))[0];
       const targetLane = state.filter(lane => lane.notes.includes(action.targetId))[0];
       const sourceNoteIndex = sourceLane.notes.indexOf(action.sourceId);
@@ -64,6 +64,7 @@ export default function lane(state=[], action) {
       }
 
       return state;
+    }
     default:
       return state;
   }
