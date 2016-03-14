@@ -14,7 +14,7 @@ class App extends Component {
 
     return (
       <div>
-        <h1>Nötes</h1>
+        <h1>Cache Dispencer</h1>
         <button className="add-lane" onClick={create}>+</button>
         <Lanes lanes={lanes} />
       </div>
