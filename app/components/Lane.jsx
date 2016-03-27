@@ -1,13 +1,12 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
 import { DropTarget } from 'react-dnd';
 import ItemTypes from '../constants/itemTypes';
+import AltContainer from 'alt-container';
 import Notes from './Notes.jsx';
+import NoteActions from '../actions/NoteActions';
+import NoteStore from '../stores/NoteStore';
+import LaneActions from '../actions/LaneActions';
 import Editable from './Editable';
-import { createNote, updateNote, deleteNote } from '../actions/note';
-import {
-  detachFromLane, updateLane,
-  deleteLane, attachToLane } from '../actions/lane';
 
 const noteTarget = {
   hover(targetProps, monitor) {
@@ -15,7 +14,7 @@ const noteTarget = {
     const sourceId = sourceProps.id;
 
     if (!targetProps.lane.notes.length) {
-      attachToLane({
+      LaneActions.attachToLane({
         laneId: targetProps.lane.id,
         noteId: sourceId
       });
@@ -26,10 +25,7 @@ const noteTarget = {
 @DropTarget(ItemTypes.NOTE, noteTarget, (connect) => ({
   connectDropTarget: connect.dropTarget()
 }))
-class Lane extends Component {
-  constructor(props) {
-    super(props);
-  }
+export default class Lane extends Component {
   render() {
     const { connectDropTarget, lane, ...props } = this.props;
 
@@ -54,60 +50,58 @@ class Lane extends Component {
           </div>
         </div>
 
-        <Notes
-          onValueClick={this.activateNoteEdit}
-          onEdit={this.editNote}
-          onDelete={this.deleteNote}
-        />
+        <AltContainer
+          stores={[NoteStore]}
+          inject={{notes: () => NoteStore.get(lane.notes)}}>
+
+          <Notes
+            onValueClick={this.activateNoteEdit}
+            onEdit={this.editNote}
+            onDelete={this.deleteNote}
+          />
+        </AltContainer>
       </div>
     );
   }
-
   addNote = (e) => {
     e.stopPropagation();
-    const { dispatch, lane } = this.props;
+    const note = NoteActions.create({task: 'New task'});
 
-    const note = dispatch(createNote());
-    console.log(note);
-    dispatch(attachToLane(lane))
+    LaneActions.attachToLane({
+      noteId: note.id,
+      laneId: this.props.lane.id
+    });
   };
-
   editNote(id, task) {
     NoteActions.update({id, task, editing: false});
   }
-
   deleteNote = (noteId, e) => {
     e.stopPropagation();
-    detachFromLane({
+    LaneActions.detachFromLane({
       laneId: this.props.lane.id,
       noteId
     });
     NoteActions.delete(noteId);
   };
+  editName = (name) => {
+    console.log('EDIT_LANE_NAME');
 
-  editName = name => {
-    const lane = {
+    LaneActions.update({
       id: this.props.lane.id,
       editing: false,
       name
-    };
-
-    updateLane(lane);
+    });
   };
-
   deleteLane = () => {
-    deleteLane(this.props.lane);
+    LaneActions.delete(this.props.lane.id);
   };
-
   activateLaneEdit = () => {
-    const lane = {
+    console.log('EDIT_LANE');
+    LaneActions.update({
       id: this.props.lane.id,
       editing: true
-    };
-
-    updateLane(lane);
+    });
   };
-
   activateNoteEdit = (id) => {
     console.log('EDIT_NOTE');
     NoteActions.update({
@@ -116,16 +110,3 @@ class Lane extends Component {
     });
   };
 }
-
-Lane.propTypes = {
-  lane: PropTypes.object,
-  dispatch: PropTypes.func
-};
-
-function mapStateToProps(state) {
-  return {
-    lane: state.lane.lane
-  };
-}
-
-export default connect(mapStateToProps)(Lane);

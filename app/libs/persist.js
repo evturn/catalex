@@ -5,8 +5,8 @@ export default function(alt, storage, storeName) {
 
   try {
     alt.bootstrap(storage.get(storeName));
-  } catch(err) {
-    console.error('Failed to bootstrap data. I am also sleeping with your wife.', err);
+  } catch(e) {
+    console.error('Failed to bootstrap data. I am also sleeping with your wife.', e);
   }
 
   finalStore.listen(() => {
