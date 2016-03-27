@@ -2,25 +2,18 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore from './store';
-
 import App from './components/App';
-import alt from './libs/alt';
-import storage from './libs/storage';
-import persist from './libs/persist';
+import { storage } from './actions/api';
 
-import LaneStore from './stores/LaneStore';
-
-persist(alt, storage, 'app');
+const db = storage.get('app');
+const parsed = JSON.parse(db)
 
 const initialState = {
-  lane: {
-    lanes: LaneStore.getState().lanes || []
-  }
+  lane: parsed.LaneStore,
+  note: parsed.NoteStore
 };
-console.log(initialState);
 
 const store = configureStore(initialState);
-
 
 render(
   <Provider store={store}>
