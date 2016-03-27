@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const NpmInstallPlugin = require('npm-install-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -40,7 +39,7 @@ const common = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'node_modules/html-webpack-template/index.ejs',
-      title: 'Cache Money Records',
+      title: 'Catalex',
       appMountId: 'app',
       inject: false
     })
@@ -69,8 +68,7 @@ if (TARGET === 'start' || !TARGET) {
       ]
     },
     plugins: [
-      new webpack.HotModuleReplacementPlugin(),
-      new NpmInstallPlugin({ save: true })
+      new webpack.HotModuleReplacementPlugin()
     ]
   });
 }

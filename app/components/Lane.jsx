@@ -31,7 +31,7 @@ export default class Lane extends Component {
 
     return connectDropTarget(
       <div {...props}>
-          <div className="lane-border" />
+        <div className="lane-border" />
         <div className="lane-header" onClick={this.activateLaneEdit}>
           <div className="lane-add-note">
             <button onClick={this.addNote}>+</button>
