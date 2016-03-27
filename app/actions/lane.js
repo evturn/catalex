@@ -8,7 +8,7 @@ const actions = {
     };
   },
   update:         ()      => { type: 'UPDATE_LANE' },
-  delete:         ()      => { type: 'DELETE_LANE' },
+  deleteLane:     ()      => { type: 'DELETE_LANE' },
   attachToLane:   ()      => { type: 'ATTACH_TO_LANE' },
   detachFromLane: ()      => { type: 'DETACH_FROM_LANE' },
   move:           ()      => { type: 'MOVE' }
@@ -22,4 +22,8 @@ export const create = () => dispatch => {
     editing: false,
     name: 'Brand Nubian Lane'
   }));
+};
+
+export const deleteLane = id => dispatch => {
+  console.log(id);
 };

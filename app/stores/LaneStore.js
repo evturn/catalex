@@ -8,6 +8,7 @@ class LaneStore {
     this.bindActions(LaneActions);
     this.lanes = [];
   }
+  // Added to Redux
   create(lane) {
     lane.id = uuid.v4();
     lane.notes = lane.notes || [];

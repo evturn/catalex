@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { DropTarget } from 'react-dnd';
 import ItemTypes from '../constants/itemTypes';
 import AltContainer from 'alt-container';
@@ -6,6 +7,7 @@ import Notes from './Notes.jsx';
 import NoteActions from '../actions/NoteActions';
 import NoteStore from '../stores/NoteStore';
 import LaneActions from '../actions/LaneActions';
+import { deleteLane } from '../actions/lane';
 import Editable from './Editable';
 
 const noteTarget = {
@@ -25,9 +27,9 @@ const noteTarget = {
 @DropTarget(ItemTypes.NOTE, noteTarget, (connect) => ({
   connectDropTarget: connect.dropTarget()
 }))
-export default class Lane extends Component {
+class Lane extends Component {
   render() {
-    const { connectDropTarget, lane, ...props } = this.props;
+    const { dispatch, connectDropTarget, lane, ...props } = this.props;
 
     return connectDropTarget(
       <div {...props}>
@@ -46,7 +48,7 @@ export default class Lane extends Component {
           />
 
           <div className="lane-delete">
-            <button onClick={this.deleteLane}>X</button>
+            <button onClick={() => dispatch(deleteLane(lane.id))}>X</button>
           </div>
         </div>
 
@@ -110,3 +112,5 @@ export default class Lane extends Component {
     });
   };
 }
+
+export default connect()(Lane);
