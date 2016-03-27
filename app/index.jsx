@@ -6,14 +6,11 @@ import App from './components/App';
 import { storage } from './actions/api';
 
 const db = storage.get('app');
-const parsed = JSON.parse(db)
-
-const initialState = {
+const parsed = JSON.parse(db);
+const store = configureStore({
   lane: parsed.LaneStore,
   note: parsed.NoteStore
-};
-
-const store = configureStore(initialState);
+});
 
 render(
   <Provider store={store}>

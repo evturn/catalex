@@ -1,6 +1,11 @@
-export default function lane(state={}, action) {
+export default function lane(state={
+  lanes: []
+}, action) {
   switch (action.type) {
     case 'CREATE_LANE':
+      return Object.assign({}, state, {
+        lanes: state.lanes.concat(action.payload)
+      });
     case 'UPDATE_LANE':
     case 'DELETE_LANE':
     case 'ATTACH_TO_LANE':
