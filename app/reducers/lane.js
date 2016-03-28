@@ -8,6 +8,9 @@ export default function lane(state={
       });
     case 'UPDATE_LANE':
     case 'DELETE_LANE':
+      return Object.assign({}, state, {
+        lanes: state.lanes.filter(lane => lane.id !== action.id)
+      });
     case 'ATTACH_TO_LANE':
     case 'DETACH_FROM_LANE':
     case 'MOVE':
