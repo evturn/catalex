@@ -35,7 +35,7 @@ class Lane extends Component {
     return connectDropTarget(
       <div {...props}>
         <div className="lane-border" />
-        <div className="lane-header" onClick={() => dispatch(editLane(id))}>
+        <div className="lane-header">
           <div className="lane-add-note">
             <button onClick={this.addNote}>+</button>
           </div>
@@ -44,11 +44,10 @@ class Lane extends Component {
             <input
               className="lane-name"
               type="text"
-              ref={e => e ? e.selectionStart = name.length : null}
               autoFocus={true}
               placeholder={name}
-              onBlur={e => dispatch(updateLane(e, id).bind(this))}
-              onKeyPress={e => dispatch(updateLane(e, id).bind(this))}
+              onBlur={e => dispatch(updateLane({e, id}).bind(this))}
+              onClick={() => dispatch(editLane(id).bind(this))}
             />
           ) : (
             <div onClick={() => dispatch(editLane(id))}>

@@ -1,5 +1,5 @@
 const actions = {
-  create: () => { type: 'CREATE_NOTE' },
-  update: () => { type: 'UPDATE_NOTE' },
-  delete: () => { type: 'DELETE_NOTE' }
+  createNote: () => ({ type: 'CREATE_NOTE' }),
+  updateNote: () => ({ type: 'UPDATE_NOTE' }),
+  deleteNote: () => ({ type: 'DELETE_NOTE' })
 };

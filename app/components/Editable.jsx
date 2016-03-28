@@ -4,7 +4,7 @@ import { updateLane } from '../actions/lane';
 export default class Editable extends Component {
   render() {
     const {value, lane, dispatch, onValueClick, editing, ...props} = this.props;
-    console.log(editing);
+
     return (
       <div {...props}>
         {editing ? this.renderEdit() : this.renderValue()}
