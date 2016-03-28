@@ -29,7 +29,8 @@ const noteTarget = {
 }))
 class Lane extends Component {
   render() {
-    const { dispatch, connectDropTarget, lane, ...props } = this.props;
+    const { dispatch, lane, notes, connectDropTarget, ...props } = this.props;
+    const [laneNotes] = lane.notes.map(id => notes.filter(note => id === note.id));
 
     return connectDropTarget(
       <div {...props}>
@@ -52,16 +53,13 @@ class Lane extends Component {
           </div>
         </div>
 
-        <AltContainer
-          stores={[NoteStore]}
-          inject={{notes: () => NoteStore.get(lane.notes)}}>
-
           <Notes
+            notes={laneNotes || []}
             onValueClick={this.activateNoteEdit}
             onEdit={this.editNote}
             onDelete={this.deleteNote}
           />
-        </AltContainer>
+
       </div>
     );
   }
@@ -113,4 +111,8 @@ class Lane extends Component {
   };
 }
 
-export default connect()(Lane);
+export default connect(
+  state => ({
+    notes: state.note.notes
+  })
+)(Lane);

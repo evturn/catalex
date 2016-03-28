@@ -3,7 +3,10 @@ import Note from './Note';
 import Editable from './Editable';
 import LaneActions from '../actions/LaneActions';
 
-export default ({notes, onValueClick, onEdit, onDelete}) => {
+export default props => {
+  const {
+    notes, onValueClick, onEdit, onDelete } = props;
+  // console.log(notes);
   return (
     <ul className="notes">{notes.map(note =>
       <Note
