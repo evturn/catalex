@@ -2,11 +2,12 @@ import uuid from 'node-uuid';
 
 const actions = {
   create:         payload => ({ type: 'CREATE_LANE', payload }),
-  update:         ()      => { type: 'UPDATE_LANE' },
+  update:         ()      => ({ type: 'UPDATE_LANE' }),
   deleteLane:     id      => ({ type: 'DELETE_LANE', id }),
-  attachToLane:   ()      => { type: 'ATTACH_TO_LANE' },
-  detachFromLane: ()      => { type: 'DETACH_FROM_LANE' },
-  move:           ()      => { type: 'MOVE' }
+  editLane:       id      => ({ type: 'EDIT_LANE', id }),
+  attachToLane:   ()      => ({ type: 'ATTACH_TO_LANE' }),
+  detachFromLane: ()      => ({ type: 'DETACH_FROM_LANE' }),
+  move:           ()      => ({ type: 'MOVE' }),
 };
 
 
@@ -21,4 +22,8 @@ export const create = () => dispatch => {
 
 export const deleteLane = id => dispatch => {
   dispatch(actions.deleteLane(id));
+};
+
+export const editLane = id => dispatch => {
+  dispatch(actions.editLane(id));
 };

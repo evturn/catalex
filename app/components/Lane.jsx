@@ -7,7 +7,7 @@ import Notes from './Notes.jsx';
 import NoteActions from '../actions/NoteActions';
 import NoteStore from '../stores/NoteStore';
 import LaneActions from '../actions/LaneActions';
-import { deleteLane } from '../actions/lane';
+import { deleteLane, editLane } from '../actions/lane';
 import Editable from './Editable';
 
 const noteTarget = {
@@ -45,7 +45,7 @@ class Lane extends Component {
             editing={lane.editing}
             value={lane.name}
             onEdit={this.editName}
-            onValueClick={this.activateLaneEdit}
+            onValueClick={() => dispatch(editLane(lane.id))}
           />
 
           <div className="lane-delete">
@@ -92,6 +92,7 @@ class Lane extends Component {
       name
     });
   };
+  // Ported to Redux
   deleteLane = () => {
     LaneActions.delete(this.props.lane.id);
   };

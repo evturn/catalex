@@ -8,7 +8,7 @@ class LaneStore {
     this.bindActions(LaneActions);
     this.lanes = [];
   }
-  // Added to Redux
+  // Ported to Redux
   create(lane) {
     lane.id = uuid.v4();
     lane.notes = lane.notes || [];
@@ -28,6 +28,7 @@ class LaneStore {
 
       this.setState({ lanes });
     }
+  // Ported to Redux
   delete(id) {
     this.setState({
       lanes: this.lanes.filter(lane => lane.id !== id)
