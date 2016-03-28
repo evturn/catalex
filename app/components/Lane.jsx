@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { DropTarget } from 'react-dnd';
 import ItemTypes from '../constants/itemTypes';
@@ -7,7 +7,7 @@ import Notes from './Notes.jsx';
 import NoteActions from '../actions/NoteActions';
 import NoteStore from '../stores/NoteStore';
 import LaneActions from '../actions/LaneActions';
-import { deleteLane, editLane } from '../actions/lane';
+import { deleteLane, editLane, updateLane } from '../actions/lane';
 import Editable from './Editable';
 
 const noteTarget = {
@@ -29,27 +29,36 @@ const noteTarget = {
 }))
 class Lane extends Component {
   render() {
-    const { dispatch, lane, notes, connectDropTarget, ...props } = this.props;
-    const [laneNotes] = lane.notes.map(id => notes.filter(note => id === note.id));
+    const { dispatch, id, notes, name, editing, allNotes, connectDropTarget, ...props } = this.props;
+    const [laneNotes] = notes.map(id => allNotes.filter(note => id === note.id));
 
     return connectDropTarget(
       <div {...props}>
         <div className="lane-border" />
-        <div className="lane-header" onClick={this.activateLaneEdit}>
+        <div className="lane-header" onClick={() => dispatch(editLane(id))}>
           <div className="lane-add-note">
             <button onClick={this.addNote}>+</button>
           </div>
 
-          <Editable
-            className="lane-name"
-            editing={lane.editing}
-            value={lane.name}
-            onEdit={this.editName}
-            onValueClick={() => dispatch(editLane(lane.id))}
-          />
+          {editing ? (
+            <input
+              className="lane-name"
+              type="text"
+              ref={e => e ? e.selectionStart = name.length : null}
+              autoFocus={true}
+              placeholder={name}
+              onBlur={e => dispatch(updateLane(e, id).bind(this))}
+              onKeyPress={e => dispatch(updateLane(e, id).bind(this))}
+            />
+          ) : (
+            <div onClick={() => dispatch(editLane(id))}>
+              <span className="value">{name}</span>
+
+            </div>
+          )}
 
           <div className="lane-delete">
-            <button onClick={() => dispatch(deleteLane(lane.id))}>X</button>
+            <button onClick={() => dispatch(deleteLane(id))}>X</button>
           </div>
         </div>
 
@@ -69,7 +78,7 @@ class Lane extends Component {
 
     LaneActions.attachToLane({
       noteId: note.id,
-      laneId: this.props.lane.id
+      laneId: this.props.id
     });
   };
   editNote(id, task) {
@@ -78,7 +87,7 @@ class Lane extends Component {
   deleteNote = (noteId, e) => {
     e.stopPropagation();
     LaneActions.detachFromLane({
-      laneId: this.props.lane.id,
+      laneId: this.props.id,
       noteId
     });
     NoteActions.delete(noteId);
@@ -87,19 +96,20 @@ class Lane extends Component {
     console.log('EDIT_LANE_NAME');
 
     LaneActions.update({
-      id: this.props.lane.id,
+      id: this.props.id,
       editing: false,
       name
     });
   };
   // Ported to Redux
   deleteLane = () => {
-    LaneActions.delete(this.props.lane.id);
+    LaneActions.delete(this.props.id);
   };
+  // Ported to Redux
   activateLaneEdit = () => {
     console.log('EDIT_LANE');
     LaneActions.update({
-      id: this.props.lane.id,
+      id: this.props.id,
       editing: true
     });
   };
@@ -112,8 +122,27 @@ class Lane extends Component {
   };
 }
 
+Lane.propTypes = {
+  id: PropTypes.string,
+  notes: PropTypes.array,
+  editing: PropTypes.bool,
+  name: PropTypes.string,
+  dispatch: PropTypes.func
+};
+
 export default connect(
   state => ({
-    notes: state.note.notes
+    allNotes: state.note.notes
   })
 )(Lane);
+
+
+// <Editable
+
+//   editing={lane.editing}
+//   value={lane.name}
+//   onEdit={this.editName}
+//   dispatch={dispatch}
+//   lane={lane}
+//   onValueClick={() => dispatch(editLane(lane.id))}
+// />

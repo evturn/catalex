@@ -6,7 +6,7 @@ import LaneActions from '../actions/LaneActions';
 export default props => {
   const {
     notes, onValueClick, onEdit, onDelete } = props;
-  // console.log(notes);
+
   return (
     <ul className="notes">{notes.map(note =>
       <Note

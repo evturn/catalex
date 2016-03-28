@@ -6,7 +6,18 @@ export default function lane(state={
       return Object.assign({}, state, {
         lanes: state.lanes.concat(action.payload)
       });
-    case 'UPDATE_LANE':
+    case 'UPDATE_LANE': {
+      const lanes = state.lanes.map(lane => {
+        if (lane.id === action.payload.id) {
+          lane.editing = false;
+          lane.name = action.payload.name
+        }
+        return lane;
+      });
+      return Object.assign({}, state, {
+        lanes
+      });
+    }
     case 'DELETE_LANE':
       return Object.assign({}, state, {
         lanes: state.lanes.filter(lane => lane.id !== action.id)

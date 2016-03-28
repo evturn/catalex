@@ -1,9 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { updateLane } from '../actions/lane';
 
 export default class Editable extends Component {
   render() {
-    const {value, onEdit, onValueClick, editing, ...props} = this.props;
-
+    const {value, lane, dispatch, onValueClick, editing, ...props} = this.props;
+    console.log(editing);
     return (
       <div {...props}>
         {editing ? this.renderEdit() : this.renderValue()}
@@ -11,11 +12,12 @@ export default class Editable extends Component {
     );
   }
   renderEdit = () => {
-    return <input type="text"
+    return <input
+      type="text"
       ref={(e) => e ? e.selectionStart = this.props.value.length : null}
       autoFocus={true}
       placeholder={this.props.value}
-      onBlur={this.finishEdit}
+      onBlur={e => dispatch(updateLane(e, lane))}
       onKeyPress={this.checkEnter}
     />;
   };
