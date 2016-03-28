@@ -30,10 +30,11 @@ export const editLane = id => dispatch => {
 
 export const updateLane = payload => dispatch => {
   const { e, id } = payload;
-  const value = e.target.value;
+  const name = e.target.value.trim();
 
-  dispatch(actions.updateLane({
-    id: id,
-    name: value.trim()
-  }));
+  if (name !== '') {
+    dispatch(actions.updateLane({ id }));
+  } else {
+    dispatch(actions.updateLane({ id, name }));
+  }
 }
