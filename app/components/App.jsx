@@ -13,7 +13,7 @@ class App extends Component {
 
     return (
       <div>
-        <h1>Nötes</h1>
+        <h1>Ñötéš</h1>
         <button className="add-lane" onClick={() => dispatch(create())}>+</button>
         <Lanes lanes={this.props.lanes} />
       </div>
