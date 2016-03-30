@@ -8,7 +8,6 @@ import NoteActions from '../actions/NoteActions';
 import NoteStore from '../stores/NoteStore';
 import LaneActions from '../actions/LaneActions';
 import { deleteLane, editLane, updateLane } from '../actions/lane';
-import Editable from './Editable';
 
 const noteTarget = {
   hover(targetProps, monitor) {
@@ -52,7 +51,6 @@ class Lane extends Component {
           ) : (
             <div onClick={() => dispatch(editLane(id))}>
               <span className="value">{name}</span>
-
             </div>
           )}
 
@@ -67,7 +65,6 @@ class Lane extends Component {
             onEdit={this.editNote}
             onDelete={this.deleteNote}
           />
-
       </div>
     );
   }
@@ -134,14 +131,3 @@ export default connect(
     allNotes: state.note.notes
   })
 )(Lane);
-
-
-// <Editable
-
-//   editing={lane.editing}
-//   value={lane.name}
-//   onEdit={this.editName}
-//   dispatch={dispatch}
-//   lane={lane}
-//   onValueClick={() => dispatch(editLane(lane.id))}
-// />
