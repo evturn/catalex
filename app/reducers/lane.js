@@ -32,6 +32,12 @@ export default function lane(state={
         lanes
       });
     }
+    case 'CREATE_NOTE': {
+      const { lane, note } = action.payload;
+
+      const currentLane = state.lanes.filter(laneItem => laneItem.id === lane.id);
+      currentLane.notes.concat(note.id);
+    }
     case 'ATTACH_TO_LANE':
     case 'DETACH_FROM_LANE':
     case 'MOVE':

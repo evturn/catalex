@@ -7,7 +7,7 @@ import Notes from './Notes.jsx';
 import NoteActions from '../actions/NoteActions';
 import NoteStore from '../stores/NoteStore';
 import LaneActions from '../actions/LaneActions';
-import { deleteLane, editLane, updateLane } from '../actions/lane';
+import { deleteLane, editLane, updateLane, createNote } from '../actions/lane';
 
 const noteTarget = {
   hover(targetProps, monitor) {
@@ -36,7 +36,7 @@ class Lane extends Component {
         <div className="lane-border" />
         <div className="lane-header">
           <div className="lane-add-note">
-            <button onClick={this.addNote}>+</button>
+            <button onClick={() => dispatch(createNote(id).bind(this))}>+</button>
           </div>
 
           {editing ? (

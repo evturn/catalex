@@ -5,6 +5,7 @@ const actions = {
   updateLane:     payload => ({ type: 'UPDATE_LANE', payload }),
   deleteLane:     id      => ({ type: 'DELETE_LANE', id }),
   editLane:       id      => ({ type: 'EDIT_LANE', id }),
+  createNote:     payload => ({ type: 'CREATE_NOTE', payload }),
   attachToLane:   ()      => ({ type: 'ATTACH_TO_LANE' }),
   detachFromLane: ()      => ({ type: 'DETACH_FROM_LANE' }),
   move:           ()      => ({ type: 'MOVE' }),
@@ -35,4 +36,16 @@ export const updateLane = payload => dispatch => {
   if (name !== '') {
     dispatch(actions.updateLane({ id, name }));
   }
-}
+};
+
+export const createNote = payload => dispatch => {
+  const lane = {
+    id: payload.id
+  };
+  const note = {
+    id: uuid.v4(),
+    task: ''
+  };
+
+  dispatch(actions.createNote({ lane, note }))
+};
